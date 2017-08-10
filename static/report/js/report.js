@@ -609,11 +609,11 @@
           data.sgv = cgmData.slice();
           data.sgv.sort(function(a, b) { return a.mills - b.mills; });
           var lastDate = 0;
-          data.sgv = data.sgv.filter(function(d) {
+          /*data.sgv = data.sgv.filter(function(d) {
             var ok = (lastDate + ONE_MIN_IN_MS) < d.mills;
             lastDate = d.mills;
             return ok;
-          });
+          });*/
           data.mbg = mbgData.slice();
           data.mbg.sort(function(a, b) { return a.mills - b.mills; });
           data.cal = calData.slice();
