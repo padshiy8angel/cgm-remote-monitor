@@ -633,7 +633,6 @@
             treatment.mills = timestamp.getTime();
             return treatment;
           });
-          console.log(treatmentData);
           data.treatments = treatmentData.slice();
           data.treatments.sort(function(a, b) { return a.mills - b.mills; });
           // filter 'Combo Bolus' events
