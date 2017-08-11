@@ -483,10 +483,10 @@ client.init(function loaded () {
     foodrec.category = $('#fe_category').val();
     foodrec.subcategory = $('#fe_subcategory').val();
     foodrec.name = $('#fe_name').val();
-    foodrec.portion = parseInt($('#fe_portion').val());
+    foodrec.portion = parseFloat($('#fe_portion').val());
     foodrec.portion = foodrec.portion || 0;
     foodrec.unit = $('#fe_unit').val();
-    foodrec.carbs = parseInt($('#fe_carbs').val());
+    foodrec.carbs = parseFloat($('#fe_carbs').val());
     foodrec.carbs = foodrec.carbs || 0;
     foodrec.gi = parseInt($('#fe_gi').val());
     
