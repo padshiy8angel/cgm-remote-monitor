@@ -110,7 +110,10 @@
       <span id="authentication_placeholder"></span>
     </div>
     
-    <script src="/public/js/bundle.js"></script>
+    <script type="text/javascript" >
+      var r = Math.round(99999999 * Math.random());
+      document.write("<script src='/public/js/bundle.js?r=" + r + "'><\/script>");
+    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/bower_components/jQuery-Storage-API/jquery.storageapi.min.js"></script>
     <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
