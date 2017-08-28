@@ -221,6 +221,7 @@ client.init(function loaded () {
       .append($('<span>').attr('class','width50px').css('text-align','center').append(translate('Unit')))
       .append($('<span>').attr('class','width100px').css('text-align','center').append(translate('Carbs')))
       .append($('<span>').attr('class','width100px').css('text-align','center').append(translate('GI')+' [1-3]'))
+      .append($('<span>').attr('class','width100px').css('text-align','center').append(translate('GI')+' real'))
       .append($('<span>').attr('class','width150px').append(translate('Category')))
       .append($('<span>').attr('class','width150px').append(translate('Subcategory')));
 
@@ -242,6 +243,7 @@ client.init(function loaded () {
           .append($('<span>').addClass('width50px').css('text-align','center').append(foodlist[i].unit))
           .append($('<span>').addClass('width100px').css('text-align','center').append(foodlist[i].carbs))
           .append($('<span>').addClass('width100px').css('text-align','center').append(foodlist[i].gi))
+          .append($('<span>').addClass('width100px').css('text-align','center').append(foodlist[i].gi_real))
           .append($('<span>').addClass('width150px').append(foodlist[i].category))
           .append($('<span>').addClass('width150px').append(foodlist[i].subcategory))
         );
@@ -470,6 +472,28 @@ client.init(function loaded () {
     return false;
   }
 
+  function recalcGI (gi) {
+    var calcGU = -1;
+    if (gi != null) {
+      if (gi > 0 && gi <= 35) {
+        calcGU = 1;
+      } else if (gi > 35 && gi <= 59) {
+        calcGU = 2;
+      } else {
+        calcGU = 3;
+      }
+    }
+    return calcGU;
+  }
+
+  $('#fe_gi_real').change(function (event) {
+    var calcGI = recalcGI($(this).val());
+    if (calcGI > -1) {
+      $('#fe_gi').val(calcGI);
+    }
+    event.preventDefault();
+  });
+
   // fill GUI with values from object
   function objectToGUI() {
     $('#fe_filter_category').val(filter.category);
@@ -483,7 +507,9 @@ client.init(function loaded () {
     $('#fe_portion').val(foodrec.portion ? foodrec.portion : '');
     $('#fe_unit').val(foodrec.unit);
     $('#fe_carbs').val(foodrec.carbs ? foodrec.carbs : '');
-    $('#fe_gi').val(foodrec.gi);
+    var calcGI = recalcGI(foodrec.gi_real);
+    $('#fe_gi').val(calcGI > -1 ? calcGI : foodrec.gi);
+    $('#fe_gi_real').val(foodrec.gi_real);
 
     $('#fe_quickpick_showhidden').prop('checked',showhidden);
 
@@ -506,6 +532,7 @@ client.init(function loaded () {
     foodrec.carbs = parseFloat($('#fe_carbs').val().replace(',','.'));
     foodrec.carbs = foodrec.carbs || 0;
     foodrec.gi = parseInt($('#fe_gi').val());
+    foodrec.gi_real = parseInt($('#fe_gi_real').val());
 
     showhidden = $('#fe_quickpick_showhidden').is(':checked');
   }
