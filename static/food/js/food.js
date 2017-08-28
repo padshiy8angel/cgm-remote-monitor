@@ -475,9 +475,9 @@ client.init(function loaded () {
   function recalcGI (gi) {
     var calcGU = -1;
     if (gi != null) {
-      if (gi > 0 && gi <= 35) {
+      if (gi > 0 && gi <= 40) {
         calcGU = 1;
-      } else if (gi > 35 && gi <= 59) {
+      } else if (gi > 40 && gi <= 70) {
         calcGU = 2;
       } else {
         calcGU = 3;
