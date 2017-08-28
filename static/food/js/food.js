@@ -101,6 +101,7 @@ client.init(function loaded () {
     $('#fe_id').change(updateSaveButton);
     $('#fe_quickpick_add').click(quickpickCreateRecord);
     $('#fe_quickpick_save').click(quickpickSave);
+    $('#fe_quickpick_recalcAll').click(quickpickRecalcAll);
     $('#fe_filter_category').change(fillFilterSubcategories);
     $('#fe_filter_subcategory').change(doFilter);
     $('#fe_quickpick_showhidden').change(showHidden);
@@ -343,7 +344,7 @@ client.init(function loaded () {
             .append(translate('Portions')+': ')
             .append($('<input type="text">').attr('id','fq_portions_'+q._id+'_'+j).attr('index',i).attr('findex',j).attr('value',r.portions).addClass('fe_qpportions'))
             .append('Пересчет: ')
-            .append($('<input type="text">').attr('id','fq_recalc_'+q._id+'_'+j).attr('index',i).attr('findex',j).attr('value',r.portions).addClass('fe_recalc'))
+            .append($('<input type="text">').attr('id','fq_recalc_'+q._id+'_'+j).attr('index',i).attr('findex',j).attr('value',r.carbs * r.portions).addClass('fe_recalc'))
           );
       }
     }
@@ -663,6 +664,42 @@ client.init(function loaded () {
       $('#fe_status').hide().text(translate('Error')).fadeIn('slow');
     });
 
+    maybePreventDefault(event);
+    return false;
+  }
+
+  function getFoodFromFoodListById(id) {
+    for (var i = 0; i < foodlist.length; i++) {
+      if (foodlist[i]._id == id) {
+        return foodlist[i];
+      }
+    }
+    return null;
+  }
+
+  function quickpickRecalcAll(event) {
+    for (var i = 0; i < foodquickpick.length; i++) {
+      var fqp = foodquickpick[i];
+      var carbSum = 0;
+      for (var j = 0; j < fqp.foods.length; j++) {
+        var foodItem = fqp.foods[j];
+        var foodItemDict = getFoodFromFoodListById(foodItem._id);
+        if (foodItemDict != null) {
+          foodItem.carbs = foodItemDict.carbs;
+          foodItem.gi = foodItemDict.gi;
+          foodItem.unit = foodItemDict.unit;
+          foodItem.portion = foodItemDict.portion;
+          foodItem.gi_real = foodItemDict.gi_real;
+          carbSum += foodItem.carbs * foodItem.portions;
+        } else {
+          console.log('No product found');
+          alert('No product found');
+          return false;
+        }
+      }
+      fqp.carbs = carbSum.toFixed(2);
+      updateRecord(fqp);
+    }
     maybePreventDefault(event);
     return false;
   }
