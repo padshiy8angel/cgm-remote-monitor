@@ -510,7 +510,7 @@ client.init(function loaded () {
     $('#fe_carbs').val(foodrec.carbs ? foodrec.carbs : '');
     var calcGI = recalcGI(foodrec.gi_real);
     $('#fe_gi').val(calcGI > -1 ? calcGI : foodrec.gi);
-    $('#fe_gi_real').val(foodrec.gi_real);
+    $('#fe_gi_real').val(foodrec.gi_real != null ? foodrec.gi_real : 50);
 
     $('#fe_quickpick_showhidden').prop('checked',showhidden);
 
@@ -634,7 +634,10 @@ client.init(function loaded () {
       data: foodrec,
       headers: client.headers()
     }).done(function success (response) {
+      $('#fe_status').hide().text('OK').fadeIn('slow');
       console.log('Updated record: ',response);
+    }).fail(function fail() {
+      $('#fe_status').hide().text(translate('Error')).fadeIn('slow');
     });
   }
 
