@@ -23,8 +23,11 @@
       <meta name="msapplication-config" content="/browserconfig.xml">
       <meta name="theme-color" content="#333333">
 
-      <link rel="stylesheet" type="text/css" href="/css/report.css?v=0.9.2" />
-      <link rel="stylesheet" type="text/css" href="/bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css">    
+        <script type="text/javascript" >
+            var r = Math.round(99999999 * Math.random());
+            document.write("<link rel='stylesheet' type='text/css' href='/css/report.css?v=" + r + "'/>");
+        </script>
+      <link rel="stylesheet" type="text/css" href="/bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css">
     </head>
     <body>
         <h1><img src="/images/logo1.png"><span class="translate">Nightscout reporting</span></h1>

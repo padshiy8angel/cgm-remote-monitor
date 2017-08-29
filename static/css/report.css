@@ -63,3 +63,13 @@ body {
   min-width: 150px;
   max-width: 400px;
 }
+
+.fixtable-fixed {
+  position: fixed;
+  top: 0;
+  z-index: 101;
+  background-color: #FCF8E4;
+  border: 1px solid black;
+  display: table;
+  width: 100%;
+}
