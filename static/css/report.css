@@ -68,7 +68,7 @@ body {
   position: fixed;
   top: 0;
   z-index: 101;
-  background-color: #FCF8E4;
+  background-color: grey;
   border: 1px solid black;
   display: table;
   width: 100%;
