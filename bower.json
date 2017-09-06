@@ -7,6 +7,7 @@
     "jquery": "2.1.0",
     "jquery-flot": "0.8.3",
     "jquery-ui": "~1.11.3",
+    "jquery.countdown": "2.2.0",
     "swagger-ui": "~2.1.2",
     "tipsy-jmalonzo": "~1.0.1",
     "tone": "*"

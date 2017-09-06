@@ -1,1 +1,2 @@
-node server.js
+call svcomp.bat
+call node server.js

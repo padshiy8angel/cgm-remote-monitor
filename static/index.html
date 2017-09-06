@@ -24,7 +24,6 @@
       <meta name="msapplication-TileImage" content="/images/mstile-144x144.png">
       <meta name="msapplication-config" content="/browserconfig.xml">
       <meta name="theme-color" content="#333333">
-
       <link rel="stylesheet" type="text/css" href="/css/drawer.css?v=0.9.2" />
       <link rel="stylesheet" type="text/css" href="/css/main.css?v=0.9.2" />
       <link rel="stylesheet" type="text/css" href="/css/dropdown.css" />
@@ -44,6 +43,7 @@
                     <a id="boluscalcDrawerToggle" class="tip" original-title="Bolus Wizard" href="#" style="display:none;"><i class="icon-calc"></i></a>
                 </div>
                 <div class="customTitle">Nightscout</div>
+                <div id="refreshCounter"></div>
             </div>
             <div id="notification">
                 <a href="#"><span></span><i class="icon-cancel-circled"></i></a>
@@ -623,6 +623,7 @@
         <script src="/bower_components/jQuery-Storage-API/jquery.storageapi.min.js"></script>
         <script src="/bower_components/tipsy-jmalonzo/src/javascripts/jquery.tipsy.js"></script>
         <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/bower_components/jquery.countdown/dist/jquery.countdown.min.js"></script>
         <script src="/js/client.js"></script>
     </body>
 </html>

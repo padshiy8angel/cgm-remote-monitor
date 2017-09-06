@@ -677,3 +677,10 @@ a, a:visited, a:link {
     line-height: 13px;
   }
 }
+
+#refreshCounter {
+  position: absolute;
+  top: 10px;
+  left: 170px;
+  z-index: 1000;
+}
