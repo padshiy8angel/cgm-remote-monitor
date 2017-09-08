@@ -679,7 +679,7 @@ a, a:visited, a:link {
 }
 
 #refreshCounter {
-  position: absolute;
+  position: inherit;
   top: 10px;
   left: 170px;
   z-index: 1000;

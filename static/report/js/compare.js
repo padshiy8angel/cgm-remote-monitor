@@ -5,7 +5,6 @@ function slippy (dom, opt) {
 
   var svg = { };
   var chart;
-  var container;
   var scales = { x: { }, y: { } };
   var dom_width, dom_height, width, height;
   var scaleExtent = [ 0, 200 ];
@@ -17,7 +16,7 @@ function slippy (dom, opt) {
 
   function frame ( ) {
     get_dimensions( );
-    var range = frame.getRange( );
+    var range;
     // var width = dom.width( );
     // var height = dom.height( );
     svg.attr('width', dom_width)
@@ -41,13 +40,13 @@ function slippy (dom, opt) {
 
   frame.getRange = function _getRange ( ) {
     return [frame.begin, frame.end];
-  }
+  };
 
   frame.setRange = function _setRange (begin, end) {
     frame.begin = Date.create(begin);
     frame.end = Date.create(end);
     return frame.getRange( );
-  }
+  };
 
   function get_dimensions( ) {
     dom_width = dom.width( );
@@ -67,7 +66,6 @@ function slippy (dom, opt) {
     svg = d3.select(dom.get(0)).append('svg')
       .attr('class', 'slippy-chart')
       ;
-       ;
     chart = svg.append('g')
       .attr('class', 'widget')
       .attr("tranform", "translate(" + 0 + ", " + margin.top + ")")
@@ -96,7 +94,6 @@ function slippy (dom, opt) {
       .x(scales.x)
       .scaleExtent(scaleExtent)
       .on('zoom', frame);
-      ;
     svg.call(zoomer);
 
     // frame.setRange(begin, end);
@@ -165,13 +162,7 @@ function cached (opts) {
     storage.add(records);
   }
 
-  function dateString (d) { return d.dateString; }
   function dateStringDate (d) { return Date.create(d.dateString); }
-  function sgv (d) { return d.sgv; }
-  function is_clean (d) { return sgv(d) > 39; }
-  function is_in_range (d) { return sgv(d) >= range.low && sgv(d) <= range.high; }
-  function is_high (d) { return sgv(d) > range.high; }
-  function is_low (d) { return sgv(d) < range.low; }
 
   api.dims = dims;
   api.get = get;
@@ -188,17 +179,14 @@ function manager (view, data, opts) {
     .domain([0, 10])
     .range(colorbrewer.Set3[10]);
   var templates = opts.templates;
-  var item_opts = opts.item_opts || { };
   var pools = [ ];
-  var master = { };
   var cache = opts.cache || cached({ });
   function manage ( ) {
   }
 
   function init ( ) {
-    rows = view.find('.reticle');
-    if (rows.length > 0) {
-    } else {
+    var rows = view.find('.reticle');
+    if (rows.length < 1) {
       var item = make({ });
       pools.push(item);
     }
@@ -264,7 +252,6 @@ function pager (opts) {
   var cache = opts.cache;
   var DATE_FMT = "{yyyy}-{MM}-{dd}";
 
-  var bisect = d3.bisector(function (d) { return Date.create(d.dateString); });
   function page ( ) {
   }
 
@@ -281,7 +268,7 @@ function pager (opts) {
     console.log('QUERY FOR', range.length, 'days', q, query);
     iter_query(range);
     return;
-    if (payload && payload.length > 0) {
+    /*if (payload && payload.length > 0) {
       console.log("NUM DAYS", range.length);
       // TODO: soft update, only get deltas against the edges of the
       // cursor.
@@ -302,7 +289,7 @@ function pager (opts) {
       do_query(start, end, first_page);
     }
     query.begin = start;
-    query.end = end;
+    query.end = end;*/
   }
 
   function param_string (begin, end) {
@@ -310,9 +297,6 @@ function pager (opts) {
       "find[dateString][$gte]=" + Date.create(begin).format(DATE_FMT)
     , "find[dateString][$lte]=" + Date.create(end).format(DATE_FMT)
     ].join('&')
-  }
-
-  function iter (prev, current, index, tail) {
   }
 
   function iter_query (range) {
@@ -337,21 +321,6 @@ function pager (opts) {
 
   }
 
-  function accrue (begin, end, cb) {
-    var q = {
-      start: Date.create(Date.create(start).format(DATE_FMT))
-    , end: Date.create(Date.create(end).format(DATE_FMT))
-    };
-    var range = d3.time.days(q.start, q.end);
-    if (range.length > 3) {
-      var half = range.length / 2;
-      var head = range.slice(0, half);
-      var tail = range.slice(half);
-      // head.reduce(iter, { });
-      // tail.reduce(iter, { });
-    }
-  }
-
   function collate (resp) {
     console.log('payload', payload.length, 'resp', resp.length);
     payload = payload.concat(resp);
@@ -374,12 +343,6 @@ function pager (opts) {
     $.getJSON(fetch, cb);
   }
   
-  function first_page (resp) {
-    // console.log('resp', resp);
-    payload = resp;
-    do_payload( );
-  }
-
   function do_payload ( ) {
     if (opts.callback && opts.callback.call) {
       opts.callback(payload);
@@ -413,7 +376,6 @@ function time_in_range (data, opts) {
   function is_in_range (d) { return sgv(d) >= range.low && sgv(d) <= range.high; }
   function is_high (d) { return sgv(d) > range.high; }
   function is_low (d) { return sgv(d) < range.low; }
-  var results = [ ];
   var days = d3.nest( )
       .key(function (d) {
         return  Date.create(d.dateString).format('{yyyy}-{MM}-{dd}')
@@ -440,7 +402,6 @@ function time_in_range (data, opts) {
 
 function ranger (dom, opts) {
   var scales = { x: { }, y: { } };
-  var dimensions = {height: null, width: null };
   var margin = {top: 20, right: 50, bottom: 20, left: 50};
   var xAxis, yAxis;
   var dom_width, dom_height;
@@ -502,17 +463,13 @@ function ranger (dom, opts) {
         .attr("title",  function (d) { return d.key; })
         .attr("fill", function (d) { return d.values.color; })
         .attr("cx", function (d) { return scales.x(d.values.target); })
-        .attr("cy", function (d) { return scales.y(d.values.mean); })
+        .attr("cy", function (d) { return scales.y(d.values.mean); });
     return dots;
-  }
-
-  function render (selection) {
-    console.log('selection');
   }
 
   my.setRange = function _setRange (begin, end) {
     adjuster(begin, end);
-  }
+  };
 
   function adjust_range (begin, end) {
     my.page.refresh(begin, end);
@@ -521,8 +478,7 @@ function ranger (dom, opts) {
   var adjuster = _.debounce(adjust_range, 1000);
 
   function on_data (payload) {
-    var days = time_in_range(payload, opts);
-    my.data = days;
+    my.data = time_in_range(payload, opts);
     if (dots && dots.selectAll) {
       my( );
     }
