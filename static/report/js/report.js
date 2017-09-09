@@ -40,7 +40,7 @@
     }
   };
   
-  //var ONE_MIN_IN_MS = 60000;
+  var ONE_MIN_IN_MS = 60000;
   
   prepareGUI();
 
@@ -608,7 +608,7 @@
            // sometimes cgm contains duplicates.  uniq it.
           data.sgv = cgmData.slice();
           data.sgv.sort(function(a, b) { return a.mills - b.mills; });
-          //var lastDate = 0;
+          var lastDate = 0;
           /*data.sgv = data.sgv.filter(function(d) {
             var ok = (lastDate + ONE_MIN_IN_MS) < d.mills;
             lastDate = d.mills;
