@@ -550,7 +550,7 @@ client.init(function loaded () {
     GUIToObject();
 
     if (!client.hashauth.isAuthenticated()) {
-      window.alert(translate('Your device is not authenticated yet'));
+      alert(translate('Your device is not authenticated yet'));
       maybePreventDefault(event);
       return false;
     }
@@ -602,7 +602,7 @@ client.init(function loaded () {
 
   function deleteRecord(_id) {
     if (!client.hashauth.isAuthenticated()) {
-      window.alert(translate('Your device is not authenticated yet'));
+      alert(translate('Your device is not authenticated yet'));
       maybePreventDefault(event);
       return false;
     }
@@ -623,7 +623,7 @@ client.init(function loaded () {
 
   function updateRecord(foodrec) {
     if (!client.hashauth.isAuthenticated()) {
-      window.alert(translate('Your device is not authenticated yet'));
+      alert(translate('Your device is not authenticated yet'));
       maybePreventDefault(event);
       return false;
     }
@@ -645,7 +645,7 @@ client.init(function loaded () {
     var newrec = _.cloneDeep(quickpickrec_template);
 
     if (!client.hashauth.isAuthenticated()) {
-      window.alert(translate('Your device is not authenticated yet'));
+      alert(translate('Your device is not authenticated yet'));
       maybePreventDefault(event);
       return false;
     }
@@ -696,7 +696,7 @@ client.init(function loaded () {
           carbSum += foodItem.carbs * foodItem.portions;
         } else {
           console.log('No product found');
-          window.alert('No product found');
+          alert('No product found');
           return false;
         }
       }
@@ -709,7 +709,7 @@ client.init(function loaded () {
 
   function quickpickSave(event) {
     if (!client.hashauth.isAuthenticated()) {
-      window.alert(translate('Your device is not authenticated yet'));
+      alert(translate('Your device is not authenticated yet'));
       return false;
     }
 
