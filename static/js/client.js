@@ -66,8 +66,7 @@ app.controller('graphController', function ($scope, $http, $interval) {
     }
 
     function tooltipTop(y, chart) {
-        var windowheight = chart.prevChartHeight;
-        var top = windowheight - y - 8;
+        var top = y + 15;
         return top + 'px';
     }
 
@@ -84,7 +83,7 @@ app.controller('graphController', function ($scope, $http, $interval) {
             var ylineval = recalc.client.ylineval;
             ylineval.style("opacity", .9);
             ylineval.style('left', tooltipLeft(x3, recalc.chart));
-            ylineval.style('top', tooltipTop(yTop, recalc.chart));
+            ylineval.style('top', tooltipTop(event.pageY, recalc.chart));
             ylineval.html('<strong>Гликемия:</strong> ' + y3.toFixed(1) + '<br><strong>Время:</strong> ' + (new Date(mils)).toLocaleTimeString());
         }
     };
