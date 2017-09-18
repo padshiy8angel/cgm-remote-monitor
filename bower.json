@@ -10,7 +10,9 @@
     "jquery.countdown": "2.2.0",
     "swagger-ui": "~2.1.2",
     "tipsy-jmalonzo": "~1.0.1",
-    "tone": "*"
+    "tone": "*",
+    "angular": "~1.6.6",
+    "angular-loading-bar": "0.9.0"
   },
   "resolutions": {
     "jquery": "2.1.0"

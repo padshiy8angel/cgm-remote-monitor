@@ -684,3 +684,9 @@ a, a:visited, a:link {
   left: 170px;
   z-index: 1000;
 }
+
+#yline {
+  stroke: white;
+  stroke-width: 1px;
+  stroke-dasharray: 1px;
+}
