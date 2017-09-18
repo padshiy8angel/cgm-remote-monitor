@@ -97,7 +97,6 @@ app.controller('graphController', function ($scope, $http, $interval) {
             ylineval.style('left', tooltipLeft(x3, recalc.chart));
             ylineval.style('top', tooltipTop(yTop, recalc.chart));
             ylineval.html('<strong>Гликемия:</strong> ' + y3.toFixed(1) + '<br><strong>Время:</strong> ' + (new Date(mils)).toLocaleTimeString());
-            console.log(ylineval.html);
         }
     };
 });
