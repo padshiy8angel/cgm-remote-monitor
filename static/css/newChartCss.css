@@ -1,0 +1,62 @@
+body {
+    text-align: center;
+    background-color: black;
+}
+.chart {
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    margin: 60px auto;
+    position: relative;
+}
+.y {
+    position: absolute;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+    bottom: 0;
+    padding: 5px;
+    color: white;
+}
+.x {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    padding: 5px;
+    color: white;
+}
+svg {
+    position: absolute;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+    left: 0;
+}
+.linered {
+    stroke: red;
+    stroke-width: 3px;
+}
+.lineyellow {
+    stroke: yellow;
+    stroke-width: 3px;
+}
+.linegreen {
+    stroke: green;
+    stroke-width: 3px;
+}
+.lineblack {
+    stroke: black;
+    stroke-width: 3px;
+}
+.graphlineval {
+    stroke: white;
+    stroke-width: 0.4px;
+    stroke-dasharray: 3px;
+}
+#yline {
+    stroke: white;
+    stroke-width: 1px;
+    stroke-dasharray: 1px;
+}
+#ylineval {
+    display: none;
+}

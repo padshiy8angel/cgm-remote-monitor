@@ -1,4 +1,5 @@
 'use strict';
+var TOOLTIP_TRANS_MS = 200;
 window.Nightscout.client.init();
 var app = angular.module('graphApp', ['angular-loading-bar']);
 app.directive('compile', ['$compile', function ($compile) {
@@ -14,7 +15,17 @@ app.directive('compile', ['$compile', function ($compile) {
         )
     };
 }]);
-app.controller('graphController', function ($scope, $http, $interval) {
+app.controller('primaryCtrl', function ($scope) {
+    $scope.hideTooltip = function ( ) {
+        window.Nightscout.client.ylineval.transition()
+                .duration(TOOLTIP_TRANS_MS)
+                .style('opacity', 0);
+        var yline = document.getElementById('yline');
+        yline.setAttribute("x1", 0);
+        yline.setAttribute("x2", 0);
+    };
+});
+app.controller('graphController', function ($scope) {
     $scope.calc = function (x3) {
         var client = window.Nightscout.client;
         var utils = client.utils;
@@ -81,7 +92,7 @@ app.controller('graphController', function ($scope, $http, $interval) {
         var mils = recalc.mills;
         if (y3 != null) {
             var ylineval = recalc.client.ylineval;
-            ylineval.style("opacity", .9);
+            ylineval.transition().duration(TOOLTIP_TRANS_MS).style("opacity", .9);
             ylineval.style('left', tooltipLeft(x3, recalc.chart));
             ylineval.style('top', tooltipTop(event.pageY, recalc.chart));
             ylineval.html('<strong>Гликемия:</strong> ' + y3.toFixed(1) + '<br><strong>Время:</strong> ' + (new Date(mils)).toLocaleTimeString());

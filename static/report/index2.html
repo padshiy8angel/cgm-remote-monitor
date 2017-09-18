@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        var r = Math.round(99999999 * Math.random());
+        document.write("<link rel='stylesheet' type='text/css' href='/css/newChartCss.css?v=" + r + "'/>");
+        document.write("<link rel='stylesheet' type='text/css' href='/bower_components/angular-loading-bar/build/loading-bar.min.css?v=" + r + "'/>");
+    </script>
+</head>
+<body>
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+<script src="/bower_components/angular-touch/angular-touch.min.js"></script>
+<script type="text/javascript">
+    var r = Math.round(99999999 * Math.random());
+    document.write("<script src='/report/js/reportNewChart.js?r=" + r + "'><\/script>");
+</script>
+<div ng-app="graphApp">
+    <div ng-controller="graphController as graph">
+        <div style="color:white;">
+            С <input type="datetime-local" ng-model="fromTime" disabled> по <input type="datetime-local" ng-model="toTime" disabled><br>
+            <p style="color:white;">Тайминг: <select name="timeng" ng-model="timeng">
+                <option value="3"> 3 ч.</option>
+                <option value="6" selected> 6 ч.</option>
+                <option value="12"> 12 ч.</option>
+                <option value="24"> 24 ч.</option>
+            </select></p>
+        </div>
+        <div class="chart" style="width:{{width}}px; height:{{height}}px;">      <!-- Labels -->
+            <div class="chart" style="width:{{width}}px; height:{{height}}px;">      <!-- Labels -->
+                <div class="y" style="width:{{height}}px;">{{yAxis}}</div>
+                <div class="x" compile="xAse"></div>
+                <!-- Data -->
+                <div compile="html"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
