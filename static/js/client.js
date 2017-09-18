@@ -84,7 +84,6 @@ app.controller('graphController', function ($scope, $http, $interval) {
         mils = recalc.mills;
         if (y3 != null) {
             var ylineval = recalc.client.ylineval;
-            console.log(ylineval);
             var cl;
             if (y3 < 10 && y3 > 4.5) {
                 cl = 'green';
