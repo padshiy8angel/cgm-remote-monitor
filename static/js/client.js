@@ -61,7 +61,7 @@ app.controller('graphController', function ($scope, $http, $interval) {
 
     function tooltipLeft(x, chart) {
         var windowWidth = chart.prevChartWidth;
-        var left = x + 30 < windowWidth ? x : windowWidth - 30 - 10;
+        var left = x + 150 < windowWidth ? x : windowWidth - 150 - 10;
         return left + 'px';
     }
 
@@ -74,24 +74,14 @@ app.controller('graphController', function ($scope, $http, $interval) {
     $scope.drawValueLineHor = function (event) {
         var x3 = parseFloat(event.offsetX);
         var yTop = parseFloat(event.offsetY);
-        var y3 = null;
-        var mils = null;
         var yline = document.getElementById('yline');
         yline.setAttribute("x1", x3);
         yline.setAttribute("x2", x3);
         var recalc = $scope.calc(x3);
-        y3 = recalc.y;
-        mils = recalc.mills;
+        var y3 = recalc.y;
+        var mils = recalc.mills;
         if (y3 != null) {
             var ylineval = recalc.client.ylineval;
-            var cl;
-            if (y3 < 10 && y3 > 4.5) {
-                cl = 'green';
-            } else if (y3 > 14) {
-                cl = 'red';
-            } else {
-                cl = '#b0b74b'
-            }
             ylineval.style("opacity", .9);
             ylineval.style('left', tooltipLeft(x3, recalc.chart));
             ylineval.style('top', tooltipTop(yTop, recalc.chart));
