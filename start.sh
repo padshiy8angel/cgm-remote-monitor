@@ -1,0 +1,33 @@
+#!/bin/sh
+
+ALARM_HIGH=off
+ALARM_LOW=off
+ALARM_TIMEAGO_URGENT=off
+ALARM_TIMEAGO_WARN=off
+ALARM_URGENT_HIGH=off
+ALARM_URGENT_LOW=off
+API_SECRET=7823465Oleg1
+AR2_CONE_FACTOR=2
+BASAL_RENDER=none
+CUSTOM_TITLE=Nightscout
+DEVICESTATUS_ADVANCED=true
+DISPLAY_UNITS=mmol
+ENABLE="basal bwp cage careportal cob rawbg sage iage treatmentnotify boluscalc profile delta food iob cors devicestatus upbat"
+IAGE_INFO=28700
+IAGE_URGENT=43200
+IAGE_WARN=28800
+LANGUAGE=ru
+MONGO_COLLECTION=entries
+MONGO_CONNECTION=mongodb://koloa:7823465@ds032579.mlab.com:32579/padshiy8angel
+NIGHT_MODE=off
+PROFILE_MULTIPLE=off
+SCALE_Y=log
+SHOW_PLUGINS="careportal upbat"
+SHOW_RAWBG=never
+THEME=colors
+TIME_FORMAT=24
+UPBAT_ENABLE_ALERTS=false
+UPBAT_URGENT=20
+UPBAT_WARN=30
+
+node server.js
