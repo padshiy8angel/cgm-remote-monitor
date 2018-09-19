@@ -36,6 +36,31 @@ var translate = language.set(env.settings.language).translate;
 var PORT = env.PORT;
 var HOSTNAME = env.HOSTNAME;
 
+const log4js = require('log4js');
+var logger = log4js.getLogger();
+
+// define a new console
+var oldConsole = console;
+var console=(function(){
+    return {
+        log: function(text){
+            logger.info(text);
+        },
+        info: function (text) {
+            logger.info(text);
+        },
+        warn: function (text) {
+            logger.warn(text);
+        },
+        error: function (text) {
+            logger.error(text);
+        }
+    };
+}());
+
+//Then redefine the old console
+//window.console = console;
+
 function create (app) {
   var transport = (env.ssl
                 ? require('https') : require('http'));
