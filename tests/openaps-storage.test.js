@@ -4,7 +4,7 @@ var should = require('should');
 
 describe('openaps storage', function () {
 
-  var env = require('../env')();
+  var env = require('../lib/server/env')();
 
 
   before(function (done) {
@@ -64,8 +64,6 @@ describe('openaps storage', function () {
       storage.collection('devicestatus').find({}).toArray(function callback (err, results) {
         should.not.exist(err);
         should.exist(results);
-
-        console.info('>>>devicestatus results', results);
 
         results.length.should.equal(1);
         results[0].openaps.enacted.eventualBG.should.equal(82);

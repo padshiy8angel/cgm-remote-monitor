@@ -1,6 +1,16 @@
 'use strict';
+
+$(document).on('online', function() {
+	console.log('Application got online event, reloading');
+	window.location.reload();
+});
+
+$(document).ready(function() {
+	console.log('Application got ready event');
+	window.Nightscout.client.init();
+});
+
 var TOOLTIP_TRANS_MS = 200;
-window.Nightscout.client.init();
 var app = angular.module('graphApp', ['angular-loading-bar']);
 app.directive('compile', ['$compile', function ($compile) {
     return function (scope, element, attrs) {
@@ -99,5 +109,3 @@ app.controller('graphController', function ($scope) {
         }
     };
 });
-
-
